@@ -1,18 +1,18 @@
 <?php
-/**
- * Main index file
- * Displays a CRUD table and integrates Chart.js for data visualization
- */
-require_once 'db.php';
+    /**
+     * Main index file
+     * Displays a CRUD table and integrates Chart.js for data visualization
+     */
+    require_once 'config/db.php';
 
-// fetch all products
-$products = [];
-try {
-    $stmt = $pdo->query("SELECT * FROM products");
-    $products = $stmt->fetchAll();
-} catch (PDOException $e) {
-    die("Error fetching products: " . htmlspecialchars($e->getMessage()));
-}
+    // fetch all products
+    $products = [];
+    try {
+        $stmt = $pdo->query("SELECT * FROM products");
+        $products = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        die("Error fetching products: " . htmlspecialchars($e->getMessage()));
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,14 +89,14 @@ try {
 
                                     <!-- Delete functionality -->
                                                 <button type="submit" form="deleteForm<?php echo $product['id']; ?>" class="btn btn-sm btn-danger delete-btn" onClick="return confirm('Are you sure you want to delete this product?');">Delete</button>
-                                                <form id="deleteForm<?php echo $product['id']; ?>" action="delete.php" method="post" style="display:none;">
+                                                <form id="deleteForm<?php echo $product['id']; ?>" action="includes/delete.php" method="post" style="display:none;">
                                                     <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
                                                 </form>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
                                     <!-- Create functionality -->
-                                    <form action="create.php" method="post">
+                                    <form action="includes/create.php" method="post">
                                         <tr>
                                             <td>Auto</td>
                                             <td><input type="text" name="name" class="form-control" required></td>
@@ -131,11 +131,11 @@ try {
             }, 3000);
         }
     </script>
-    <script src="displayChart.js"></script>
-    <script src="updateProducts.js"></script>
+    <script src="assets/js/displayChart.js"></script>
+    <script src="assets/js/updateProducts.js"></script>
     <script>
         function refreshChart() {
-            fetch('get_chart_data.php')
+            fetch('includes/get_chart_data.php')
                 .then(response => response.json())
                 .then(newData => {
                     displayChart(newData); // This will trigger the destroy and rebuild

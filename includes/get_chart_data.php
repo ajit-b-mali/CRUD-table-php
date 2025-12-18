@@ -1,10 +1,14 @@
 <?php
-require_once 'db.php';
+require_once '../config/db.php';
+
+header('Content-Type: application/json');
 
 try {
     $stmt = $pdo->query("SELECT category, COUNT(*) as count FROM products GROUP BY category");
     echo json_encode($stmt->fetchAll());
 } catch (PDOException $e) {
-    die("Error fetching chart data: " . htmlspecialchars($e->getMessage()));
-    echo json_encode([]);
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Server Error: ' . $e->getMessage()
+    ]);
 }
