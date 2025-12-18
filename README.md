@@ -172,66 +172,9 @@ The application uses a single `products` table:
 | **JavaScript**  | Client-side interactivity        |
 | **AJAX/Fetch**  | Asynchronous data operations     |
 
-## 🎨 Features in Detail
-
-### In-Place Editing System
-
-The in-place editing feature provides a seamless user experience:
-
-- Click **Edit** → Row converts to input fields
-- **Save** → AJAX request updates database and UI
-- **Cancel** → Restores original values without server request
-- Visual feedback with success/error alerts
-
-### AJAX Operations
-
-All Update, and Delete operations use AJAX:
-
-- No page reloads required
-- Instant visual feedback
-- JSON responses for clean error handling
-- Chart auto-refresh after data changes
-
-### Chart Visualization
-
-- Displays category distribution using Chart.js
-- Dynamically fetches data from `get_chart_data.php`
-- Auto-updates after Update and Delete operations
-- Responsive and interactive
-
-## 🐛 Troubleshooting
-
-### Database Connection Error
-
-- Verify MySQL is running
-- Check credentials in `config/db.php`
-- Ensure `digitaledu_db` database exists
-
-### AJAX Not Working
-
-- Check browser console for JavaScript errors
-- Verify file paths in includes
-- Ensure PHP `file_get_contents('php://input')` is enabled
-
-### Chart Not Displaying
-
-- Verify Chart.js CDN is accessible
-- Check `get_chart_data.php` returns valid JSON
-- Open browser console to check for errors
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📧 Contact
 
