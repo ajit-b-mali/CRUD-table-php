@@ -71,13 +71,26 @@ try {
                                             <td>$<?php echo htmlspecialchars($product['price']); ?></td>
                                             <td><?php echo htmlspecialchars($product['category']); ?></td>
                                             <td>
+                                                <button type="submit" form="editForm<?php echo $product['id']; ?>" class="btn btn-sm btn-warning">Edit</button>                                                <form id="editForm<?php echo $product['id']; ?>" action="update.php" method="post" style="display:none;">
+                                                    <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
+                                                </form>
                                                 <a href="update.php?id=<?php echo $product['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
-                                                <a href="index.php?delete=<?php echo $product['id']; ?>"
-                                                class="btn btn-sm btn-danger"
-                                                onClick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                                                <button type="submit" form="deleteForm<?php echo $product['id']; ?>" class="btn btn-sm btn-danger" onClick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+                                                <form id="deleteForm<?php echo $product['id']; ?>" action="delete.php" method="post" style="display:none;">
+                                                    <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
+                                                </form>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
+                                    <form action="create.php" method="post">
+                                        <tr>
+                                            <td>Auto</td>
+                                            <td><input type="text" name="name" class="form-control" required></td>
+                                            <td><input type="number" step="0.01" name="price" class="form-control" required></td>
+                                            <td><input type="text" name="category" class="form-control" required></td>
+                                            <td><button type="submit" class="btn btn-sm btn-success">Add</button></td>
+                                        </tr>
+                                    </form>
                                 </tbody>
                             </table>
                         </div>
