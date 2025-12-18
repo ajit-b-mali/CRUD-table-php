@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':price' => $price,
                 ':category' => $category
             ]);
-            header("Location: /index.php");
+            header("Location: ../index.php");
             exit();
         } catch (PDOException $e) {
             die("Error adding product: " . htmlspecialchars($e->getMessage()));
