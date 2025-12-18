@@ -1,23 +1,31 @@
 <?php
+// 1. Set headers and error reporting
 header('Content-Type: application/json');
 require_once __DIR__ . '/../config/db.php';
 
-// Get raw JSON data
+// 2. Get and decode raw JSON data
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
-$id = filter_var($data['id'] ?? null, FILTER_VALIDATE_INT);
+// 3. Simple Validation
+$id = isset($data['id']) ? filter_var($data['id'], FILTER_VALIDATE_INT) : false;
 
-if (!$id) {
-    echo json_encode(['success' => false, 'message' => 'Invalid ID']);
+if ($id === false || $id <= 0) {
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Invalid or missing Product ID.'
+    ]);
     exit;
 }
 
 try {
+    // 4. Execute Delete
     $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
     $stmt->execute([$id]);
-
     echo json_encode(['success' => true]);
 } catch (PDOException $e) {
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Database error occurred during deletion.'
+    ]);
 }
