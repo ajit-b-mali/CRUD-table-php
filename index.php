@@ -79,9 +79,9 @@
                                 <form action="includes/create.php" method="post">
                                     <tr>
                                         <td>Auto</td>
-                                        <td><input type="text" name="name" class="form-control" required></td>
-                                        <td><input type="number" step="0.01" name="price" class="form-control" required></td>
-                                        <td><input type="text" name="category" class="form-control" required></td>
+                                        <td><input type="text" name="name" class="form-control"></td>
+                                        <td><input type="number" step="0.01" name="price" class="form-control"></td>
+                                        <td><input type="text" name="category" class="form-control"></td>
                                         <td><button type="submit" class="btn btn-sm btn-success">Add</button></td>
                                     </tr>
                                 </form>
