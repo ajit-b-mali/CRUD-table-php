@@ -15,6 +15,7 @@
     include 'includes/navbar.php';
 ?>
 
+<!-- Handle Alerts -->
 <?php if (isset($_GET['error'])): ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Error!</strong> <?php echo htmlspecialchars($_GET['error']); ?>

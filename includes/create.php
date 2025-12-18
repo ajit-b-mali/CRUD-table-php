@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../index.php?success=added");
             exit();
         } catch (PDOException $e) {
-            // Log error privately, show user a clean message
             die("Database Error. Please try again later.");
         }
     } else {
