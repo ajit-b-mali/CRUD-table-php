@@ -88,10 +88,14 @@
                                                 <button class="btn btn-sm btn-secondary cancel-btn" style="display:none;" onclick="cancelEdit(<?php echo $product['id']; ?>)">Cancel</button>
 
                                     <!-- Delete functionality -->
-                                                <button type="submit" form="deleteForm<?php echo $product['id']; ?>" class="btn btn-sm btn-danger delete-btn" onClick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+                                                <!-- <button type="submit" form="deleteForm<?php echo $product['id']; ?>" class="btn btn-sm btn-danger delete-btn" onClick="return confirm('Are you sure you want to delete this product?');">Delete</button>
                                                 <form id="deleteForm<?php echo $product['id']; ?>" action="includes/delete.php" method="post" style="display:none;">
                                                     <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
-                                                </form>
+                                                </form> -->
+                                                <button class="btn btn-sm btn-danger delete-btn" 
+                                                        onclick="deleteProduct(<?php echo $product['id']; ?>)">
+                                                    Delete
+                                                </button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -133,6 +137,7 @@
     </script>
     <script src="assets/js/displayChart.js"></script>
     <script src="assets/js/updateProducts.js"></script>
+    <script src="assets/js/deleteProducts.js"></script>
     <script>
         function refreshChart() {
             fetch('includes/get_chart_data.php')

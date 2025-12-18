@@ -3,7 +3,7 @@
  * Update product
  * Handles both regular form submissions and AJAX requests for in-place editing
  */
-require_once 'db.php';
+require_once '../config/db.php';
 
 // Handle AJAX request
 $json = file_get_contents('php://input');
