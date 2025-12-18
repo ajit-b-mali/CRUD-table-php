@@ -13,6 +13,14 @@ try {
 } catch (PDOException $e) {
     die("Error fetching products: " . htmlspecialchars($e->getMessage()));
 }
+
+$chartData = [];
+try {
+    $stmt = $pdo->query("SELECT category, COUNT(*) as count FROM products GROUP BY category");
+    $chartData = $stmt->fetchAll();
+} catch (PDOException $e) {
+    die("Error fetching chart data: " . htmlspecialchars($e->getMessage()));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +51,17 @@ try {
         <div class="row">
             <div class="col-md-12">
                 <h2>Products</h2>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Product Categories Chart
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card">
                     <div class="card-header">Product List</div>
@@ -236,6 +255,11 @@ try {
                 alertDiv.remove();
             }, 3000);
         }
+    </script>
+    <script src="displayChart.js"></script>
+    <script>
+        const chartData = <?php echo json_encode($chartData); ?>;
+        displayChart(chartData);
     </script>
 </body>
 </html>
