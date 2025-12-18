@@ -84,7 +84,6 @@ try {
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
-                                    
                                     <!-- Create functionality -->
                                     <form action="create.php" method="post">
                                         <tr>
@@ -208,11 +207,34 @@ try {
                     row.querySelector('.delete-btn').style.display = 'inline-block';
                     
                     delete originalValues[id];
+                    
+                    // Show success message
+                    showMessage('Product updated successfully!', 'success');
+                } else {
+                    showMessage('Error updating product: ' + result.message, 'danger');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
+                showMessage('Error updating product. Please try again.', 'danger');
             });
+        }
+
+        function showMessage(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            const container = document.querySelector('.container');
+            container.insertBefore(alertDiv, container.firstChild);
+            
+            // Auto-dismiss after 3 seconds
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
         }
     </script>
 </body>
