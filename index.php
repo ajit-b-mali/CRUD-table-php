@@ -59,6 +59,11 @@ try {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php if (empty($products)): ?>
+                                        <tr>
+                                            <td colspan="5" class="text-center">No products found.</td>
+                                        </tr>
+                                    <?php endif; ?>
                                     <?php foreach ($products as $product): ?>
                                         <tr>
                                             <td><?php echo htmlspecialchars($product['id']); ?></td>
