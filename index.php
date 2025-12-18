@@ -1,3 +1,19 @@
+<?php
+/**
+ * Main index file
+ * Displays a CRUD table and integrates Chart.js for data visualization
+ */
+require_once 'db.php';
+
+// fetch all products
+$products = [];
+try {
+    $stmt = $pdo->query("SELECT * FROM products");
+    $products = $stmt->fetchAll();
+} catch (PDOException $e) {
+    die("Error fetching products: " . htmlspecialchars($e->getMessage()));
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +35,7 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">CRUD Table</span>
+            <span class="navbar-brand mb-0 h1">Product Management System</span>
         </div>
     </nav>
 
@@ -43,56 +59,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Laptop</td>
-                                        <td>$899.99</td>
-                                        <td>Electronics</td>
-                                        <td>
-                                            <a href="update.php?id=1" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Mouse</td>
-                                        <td>$19.99</td>
-                                        <td>Electronics</td>
-                                        <td>
-                                            <a href="update.php?id=2" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Office Chair</td>
-                                        <td>$199.99</td>
-                                        <td>Furniture</td>
-                                        <td>
-                                            <a href="update.php?id=3" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Notebook</td>
-                                        <td>$5.99</td>
-                                        <td>Stationery</td>
-                                        <td>
-                                            <a href="update.php?id=4" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Monitor</td>
-                                        <td>$249.99</td>
-                                        <td>Electronics</td>
-                                        <td>
-                                            <a href="update.php?id=5" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($products as $product): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($product['id']); ?></td>
+                                            <td><?php echo htmlspecialchars($product['name']); ?></td>
+                                            <td>$<?php echo htmlspecialchars($product['price']); ?></td>
+                                            <td><?php echo htmlspecialchars($product['category']); ?></td>
+                                            <td>
+                                                <a href="update.php?id=<?php echo $product['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
+                                                <a href="index.php?delete=<?php echo $product['id']; ?>"
+                                                class="btn btn-sm btn-danger"
+                                                onClick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
