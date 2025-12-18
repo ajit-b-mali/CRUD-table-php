@@ -1,9 +1,13 @@
+let myChart = null;
 function displayChart(chartData) {
+    const ctx = document.getElementById('categoryChart').getContext('2d');
+    if (myChart !== null) {
+        myChart.destroy();
+    }
     const labels = chartData.map(item => item.category);
     const data = chartData.map(item => parseInt(item.count));
 
-    const ctx = document.getElementById('categoryChart').getContext('2d');
-    new Chart(ctx, {
+    myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
